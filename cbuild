@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+source ./lib/logger.sh
+
+echo "Arquivo cbuild rodando"
+
+log_info "Estrutura inicial criada (cbuild)"
