@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
-source ./lib/logger.sh
+source "./lib/logger.sh"
+
+check_gcc() {
+    if ! command -v gcc &> /dev/null; then
+        log_error "O GCC nao foi encontrado."
+        exit 1
+    fi
+}
+
+check_gcc
 
 echo "Arquivo cbuild rodando"
 
 log_info "Estrutura inicial criada (cbuild)"
+log_info "O GCC foi encontrado."
