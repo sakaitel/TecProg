@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+source "./lib/logger.sh"
+
+carregar_configuracao() {
+    local arquivo_config="${1:-cbuild.conf}"
+
+    if [[ ! -f "$arquivo_config" ]]; then
+        log_error "O arquivo de configuracao '$arquivo_config' nao foi encontrado"
+        exit 1
+    fi
+
+    if [[ ! -r "$arquivo_config" ]]; then
+        log_error "O arquivo de configuracao '$arquivo_config' nao tem permissao de leitura"
+        exit 1
+    fi
+
+    source "$arquivo_config"
+}

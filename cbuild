@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 source "./lib/logger.sh"
+source "./lib/builder.sh"
+source "./lib/config.sh"
 
 verificar_gcc() {
     if ! command -v gcc &> /dev/null; then
@@ -28,13 +30,21 @@ validar_comando() {
     esac
 }
 
-echo "Arquivo cbuild rodando"
-log_info "Estrutura inicial criada (cbuild)"
+verificar_permissao() {
+    if [[ ! -r "." || ! -w "." || ! -x "." ]]; then
+        log_error "Permissoes insuficientes no diretorio do projeto."
+        exit 1
+    fi
+}
 
+verificar_permissao
+log_info "Estrutura inicial rodando (cbuild)"
+
+carregar_configuracao
 verificar_gcc
-log_info "O GCC foi encontrado"
+verificar_arquivos_c "$DIRETORIO_FONTE" #src
 
-verificar_arquivos_c "src" #ja manda q tudo certo com os arquivos
+log_info "Configuracao valida. Nome executavel: $NOME_EXECUTAVEL"
 
 COMANDO="$1"
 validar_comando "$COMANDO"
