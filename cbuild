@@ -17,14 +17,12 @@ validar_comando() {
         exit 1
     fi
 
-    # Caso 2: Comando informado nao esta na lista de permitidos
     case "$comando" in
         build|run|clean|rebuild|info)
-            # Comando valido, segue a execucao
+            # comando valido, nao faz nada
             ;;
         *)
-            log_error "Comando invalido: '$comando'"
-            echo "Comandos disponiveis: build, run, clean, rebuild, info"
+            log_error "Invalido: '$comando'. Opcoes: { build / run / clean / rebuild / info}"
             exit 1
             ;;
     esac

@@ -1,5 +1,26 @@
 # TecProg
 
+## Registro do Sistema
+
+### Pastas e arquivos
+documentacao   
+| registro.md -> explicacao de pastas/arquivos/funcoes
+
+lib  
+| builder.sh  -> verificar_arquivos_c() : ve na pasta /src se tem qqr arquivo .c  
+| logger.sh -> log_info() log_error() : fazem echo na info/erro q deu  
+  
+src  
+| main.c  ->  printf("Arquivo main.c carregado\n")  
+
+### Arquivos principais  
+
+.gitignore  -> ignora build/, logs/, relatorios/  
+
+cbuild -> (funcoes abaixo)  
+| check_gcc -> autoexplicativo  
+
+## Checklists 
 ### Gabi: Compilação
 
 * [ ] **01/09 (CP 1):** Busca de `.c`/`.h` + comandos `build`, `clean` e `rebuild` funcionando
@@ -7,14 +28,14 @@
 * [ ] **11/09 (CP 3):** Corrigir os últimos bugs
 * [ ] **13/09 (Entrega):** Revisar o script final
 
-### Pessoa 2: Histórico e Métricas
+### Duda: Histórico e Métricas
 
 * [ ] **01/09 (CP 1):** Comando `run` pronto + estrutura de logs (data/hora/status)
 * [ ] **06/09 (CP 2):** Comando `info` (contagem de arquivos, tamanho final e linhas de código)
 * [ ] **11/09 (CP 3):** Tratar avisos pra quando faltar dados
 * [ ] **13/09 (Entrega):** Testar o histórico + validação final
 
-### Pessoa 3: Configuração e Modos
+### Andre: Configuração e Modos
 
 * [ ] **01/09 (CP 1):** Leitor do arquivo de configuração (`.conf`).
 * [ ] **06/09 (CP 2):** Modos verboso/debug

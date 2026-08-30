@@ -2,7 +2,7 @@
 
 ## Pastas e arquivos
 documentacao   
-|registro.md -> voce esta aqui
+| registro.md -> voce esta aqui
 
 lib  
 | builder.sh  -> verificar_arquivos_c() : ve na pasta /src se tem qqr arquivo .c  
