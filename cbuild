@@ -2,16 +2,42 @@
 
 source "./lib/logger.sh"
 
-check_gcc() {
+verificar_gcc() {
     if ! command -v gcc &> /dev/null; then
         log_error "O GCC nao foi encontrado."
         exit 1
     fi
 }
 
-check_gcc
+validar_comando() {
+    local comando="$1"
+
+    if [[ -z "$comando" ]]; then
+        log_error "Nenhum comando digitado { build / run / clean / rebuild / info}"
+        exit 1
+    fi
+
+    # Caso 2: Comando informado nao esta na lista de permitidos
+    case "$comando" in
+        build|run|clean|rebuild|info)
+            # Comando valido, segue a execucao
+            ;;
+        *)
+            log_error "Comando invalido: '$comando'"
+            echo "Comandos disponiveis: build, run, clean, rebuild, info"
+            exit 1
+            ;;
+    esac
+}
 
 echo "Arquivo cbuild rodando"
-
 log_info "Estrutura inicial criada (cbuild)"
-log_info "O GCC foi encontrado."
+
+verificar_gcc
+log_info "O GCC foi encontrado"
+
+verificar_arquivos_c "src" #ja manda q tudo certo com os arquivos
+
+COMANDO="$1"
+validar_comando "$COMANDO"
+log_info "Comando '$COMANDO' existe"
