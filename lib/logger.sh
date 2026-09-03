@@ -7,3 +7,5 @@ log_info() {
 log_error() {
     echo "[ERRO] $1" >&2
 }
+
+mkdir -p logs
