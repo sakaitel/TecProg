@@ -18,3 +18,16 @@ verificar_arquivos_c() {
         exit 1
     fi
 }
+
+limpar_projeto() {
+    local diretorio_build="${1:-build}"
+
+    if [[ -d "$diretorio_build" ]]; then
+        rm -rf "$diretorio_build"
+        log_info "Diretorio '$diretorio_build' removido com sucesso."
+    else
+        log_error "Diretorio '$diretorio_build' nao existe. Nada a limpar."
+        exit 1
+    fi
+    find . -type f -name "*.o" -delete
+}
