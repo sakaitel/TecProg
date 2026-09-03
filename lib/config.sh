@@ -8,7 +8,6 @@ carregar_configuracao() {
     # Valores padrão de reserva
     NOME_EXECUTAVEL="TecProg"
     DIRETORIO_FONTE="src"
-    NIVEL_OTIMIZACAO="-O2"
 
     if [[ ! -f "$arquivo_config" ]]; then
         log_error "O arquivo de configuracao '$arquivo_config' nao foi encontrado"
