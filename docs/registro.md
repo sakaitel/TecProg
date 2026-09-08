@@ -8,7 +8,7 @@ lib/
     | builder.sh  
         -> verificar_arquivos_c() : valida a presença da pasta src/ e de arquivos .c
         -> limpar_projeto() : limpa a pasta build/ 
-        -> mapear_executaveis() : valida se o binário (${NOME_EXECUTAVEL:-TecProg}) existe em build/
+        -> mapear_executaveis() : valida se o binário (NOME_EXECUTAVEL: - TecProg) existe em build/
     | logger.sh 
         -> log_info() / log_error() : exibem mensagens no terminal
         -> mkdir -p logs : garante a criação da pasta de logs sem gerar erros se ela já existir
