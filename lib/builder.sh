@@ -31,3 +31,15 @@ limpar_projeto() {
     fi
     find . -type f -name "*.o" -delete
 }
+
+ mapear_executaveis() {
+    local diretorio_build="${1:-build}"
+    local arquivo_executavel="$diretorio_build/arquivo_executavel"
+
+    if [[ ! -f "$arquivo_executavel"]]; then
+        log_error "O arquivo executavel '$arquivo_executavel' nao foi encontrado"
+        exit 1
+    fi
+ }
+
+
