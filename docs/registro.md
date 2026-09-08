@@ -1,35 +1,42 @@
 ## Registro do Sistema
 
-docs/     
-    | registro.md -> explicacao de pastas/arquivos/funcoes (copia disso)  
-    | checklist.md -> controle de quem fez oq quando  
-  
+docs/    
+    | registro.md -> explicação de pastas/arquivos/funcoes
+    | checklist.md -> controle de tarefas e prazos do grupo
+
 lib/     
-    | builder.sh  -> verificar_arquivos_c() : ve na pasta /src se tem qqr arquivo .c  
-    | logger.sh -> log_info() log_error() : fazem echo na info/erro q deu  
-    | config.sh -> carregar_configuracao() : carrega cbuild.conf, da erro se o arq nao foi encontrado ou se nn tem permissao de leitura
-  
+    | builder.sh  
+        -> verificar_arquivos_c() : valida a presença da pasta src/ e de arquivos .c
+        -> limpar_projeto() : limpa a pasta build/ 
+        -> mapear_executaveis() : valida se o binário (${NOME_EXECUTAVEL:-TecProg}) existe em build/
+    | logger.sh 
+        -> log_info() / log_error() : exibem mensagens no terminal
+        -> mkdir -p logs : garante a criação da pasta de logs sem gerar erros se ela já existir
+    | config.sh 
+        -> carregar_configuracao() : carrega cbuild.conf, aplica fallback (${VAR:-padrão}) // DANDO ERRADO
+
 src/     
     | main.c  ->  printf("Arquivo main.c carregado\n")  
 
 logs/     
-    | 
-
+    |     
+         
 build/     
-    | 
- 
+    |         
+              
 .gitignore  
     { 
         ignora build/, logs/, relatorios/  
     }
   
 cbuild  
-    { verificar_gcc() -> autoexplicativo  
-      validar_comando() -> comando do terminal é válido {build / run / clean / rebuild / info}  
-      verificar_permissao() -> perm leitura escrita e execussao  
+    { 
+      verificar_gcc() -> checa se o compilador gcc está instalado no PATH
+      validar_comando() -> valida se o argumento é um comando aceito {build | run | clean | rebuild | info}  
+      verificar_permissao() -> valida permissões de leitura, escrita e execução no diretório atual  
     }
   
 cbuild.conf  
     { 
-        NOME_EXECUTAVEL=TecProg, DIRETORIO_FONTE=src, NIVEL_OTIMIZACAO=-O2  
+        NOME_EXECUTAVEL=TecProg, DIRETORIO_FONTE=src  
     }
