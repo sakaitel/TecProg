@@ -30,3 +30,37 @@ limpar_projeto() {
     fi
     find . -type f -name "*.o" -delete
 }
+
+mapear_executaveis() {
+    local diretorio_build="${1:-build}"
+    local nome_binario="${NOME_EXECUTAVEL:-TecProg}"
+    local arquivo_executavel="$diretorio_build/$nome_binario"
+
+    if [[ ! -f "$arquivo_executavel" ]]; then
+        log_error "O arquivo executavel '$arquivo_executavel' nao foi encontrado"
+        exit 1
+    fi
+    
+    # arquivo existe
+    # executa o binário se ele existir
+}
+
+construir_projeto() {
+    
+    local diretorio_build="${1:-build}"
+    local diretorio_fonte="${DIRETORIO_FONTE:-src}"
+    local nome_binario="${NOME_EXECUTAVEL:-TecProg}"
+    
+    mkdir -p "$diretorio_build"
+    
+    gcc "$diretorio_fonte"/*.c -o "$diretorio_build/$nome_binario"
+    
+    log_info "Compilacao finalizada. Binario gerado em $diretorio_build/$nome_binario."
+}
+
+reconstruir_projeto() {
+    
+    
+    limpar_projeto
+    construir_projeto
+}
