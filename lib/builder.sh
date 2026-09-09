@@ -60,8 +60,6 @@ construir_projeto() {
 }
 
 reconstruir_projeto() {
-    
-    
     limpar_projeto
     construir_projeto
 }
