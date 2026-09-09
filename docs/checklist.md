@@ -2,8 +2,8 @@
 
 ## Gabi
 **07/09: Logs e comando clean**
-* [ ] `lib/logger.sh` -> add a criacao automatica da pasta `logs/` com `mkdir -p logs`
-* [ ] `lib/builder.sh` -> criar a função `limpar_projeto()` com `rm -rf build/` para apagar os arquivos binarios antigos (pasta `build/`) e avisar no log
+* [X] `lib/logger.sh` -> add a criacao automatica da pasta `logs/` com `mkdir -p logs`
+* [X] `lib/builder.sh` -> criar a função `limpar_projeto()` com `rm -rf build/` para apagar os arquivos binarios antigos (pasta `build/`) e avisar no log
 
 **11/09: Comandos build e rebuild**
 * [ ] `lib/builder.sh` -> build q corre a pasta `src/` em busca de arquivos c e roda o `gcc src/*.c -o "build/$NOME_EXECUTAVEL"`
@@ -11,7 +11,7 @@
 
 ## Duda
 **07/09: Estrutura basica e mapiar**
-* [ ] `lib/builder.sh` -> testa o caminho onde o executavel gerado ta (`build/$NOME_EXECUTAVEL`)
+* [X] `lib/builder.sh` -> testa o caminho onde o executavel gerado ta (`build/$NOME_EXECUTAVEL`)
 
 **11/09 Comando run pronto**
 * [ ] `lib/builder.sh` -> run executa `"./build/$NOME_EXECUTAVEL"`
@@ -32,11 +32,11 @@
 * [X] sem diretorio e aquivos fonte -> lib/builder.sh: verificar_arquivos_c()
 * [X] comando nao informado ou invalido -> cbuild: validar_comando()
 * [x] erro de permissao -> cbiuld: verificar_permissao() 
-* [ ] adiantar base do relatório PDF (capa, introducao, estrutura USP) + organizar repositorio/`.gitignore`
+* [X] adiantar base do relatório PDF (capa, introducao, estrutura USP) + organizar repositorio/`.gitignore`
 
 **11/09: otos erros + README.md**
 * [ ] `lib/config.sh`: `carregar_configuracao()` **(FIZ PARCIALMENTE. FALTA ANDRE TESTAR 07/09)**
 * [ ] err na escrita dos logs -> `lib/logger.sh`: add erro run de permissao/pasta no log **(FALTA GABI FAZER LOGS 07/09)**
-* [ ] err exe sem gerar binario -> `lib/builder.sh`: add erro run` **(FALTA DUDA FAZER RUN 11/09)**
+* [X] err exe sem gerar binario -> `lib/builder.sh`: add erro run` **(FALTA DUDA FAZER RUN 11/09)**
 * [ ] err compilacao gcc -> `lib/builder.sh`: add erro no build **(FALTA GABI FAZER BUILD 11/09)**
 * [ ] escrever o `README.md` completo no github com guia de uso, comandos e tabela de flags :P
