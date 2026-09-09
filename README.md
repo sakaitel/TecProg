@@ -49,11 +49,11 @@ O cbuild é um utilitario de automacao de compilacao e gerenciamento de projetos
 
 * Sistema Operacional baseado em Unix/Linux (Ubuntu, Debian, Fedora, Arch, etc.) ou ambiente WSL no Windows.
 * Compilador GCC instalado e acessivel no PATH.
-* Interpretador GNU Bash (versao 4.0 ou superior).    
+* Interpretador GNU Bash.    
   
 Não cumprir esses requisitos leva a um código de erro quando o usuário tentar rodar o programa.
 
-### Instalacao
+### Instalação
 
 1. Clone o repositorio do projeto para a sua maquina local:  
 ```text
@@ -61,7 +61,7 @@ Não cumprir esses requisitos leva a um código de erro quando o usuário tentar
     cd TecProg
 ```
 
-2. Conceda permissao de execucao ao script principal:
+2. Conceda permissao de execução ao script principal:
 ```text
     chmod +x cbuild
 ```
@@ -69,11 +69,11 @@ Não cumprir esses requisitos leva a um código de erro quando o usuário tentar
 
 ## Tabela de Comandos
 
-| Comando | Descricao |
+| Comando | Descrição |
 | --- | --- |
 | ./cbuild build | Compila os arquivos .c do diretorio fonte e gera o binario na pasta build/. |
 | ./cbuild run | Executa o binario compilado localizado no diretorio build/. |
-| ./cbuild clean | Remove a pasta build/ e elimina quaisquer arquivos objeto (.o) residuais. |
+| ./cbuild clean | Remove a pasta build/ e seus arquivos |
 | ./cbuild rebuild | Executa o comando clean seguido de um novo build em sequencia. |
 | ./cbuild info | Exibe o painel com as configuracoes ativas e estatisticas de linhas de codigo. |
 
@@ -115,7 +115,7 @@ Para redefinir o ambiente de compilacao:
 
 Todas as execucoes registradas pelo cbuild geram logs gravados automaticamente no diretorio logs/execucao.log.
 
-Em caso de falha (como ausencia de compilador, erros de sintaxe em C ou tentativa de executar o run sem compilar previamente), o script interrompe o fluxo imediatamente, dispara uma mensagem formatada via log_error e encerra com codigo de retorno 1 (exit 1).
+Em caso de falha, o script interrompe o fluxo imediatamente, dispara uma mensagem formatada via log_error e encerra com codigo de retorno 1 (exit 1).
 
 ---
 ## Explicação dos arquivos - Registro do Sistema
@@ -123,21 +123,21 @@ Em caso de falha (como ausencia de compilador, erros de sintaxe em C ou tentativ
 ### Pastas e documentos   
 ```text
 docs/   
-    registro.md -> explicacao de pastas/arquivos/funcoes (copia disso)  
-    checklist.md -> controle de quem fez oq quando  
+    registro.md -> registro de pastas/arquivos/funções para melhor organização do grupo
+    checklist.md -> controle de tarefas do grupo  
 
 lib/
     builder.sh  
-        * verificar_arquivos_c() : ve na pasta /src se tem qqr arquivo .c  
-        * limpar_projeto() : exclui tudo na pasta build/ 
-        * mapear_executaveis() : verifica se o binário gerado existe em build/  
-        * construir_projeto() : funcao build
-        * reconstruir_projeto() : rebuild, ou seja, clean e build em seguida
+        * verificar_arquivos_c() -> verifica na pasta /src se existem arquivos .c  
+        * limpar_projeto() -> exclui todos os arquivos da pasta build/ 
+        * mapear_executaveis() -> verifica se o arquivo binário existe em build/  
+        * construir_projeto() -> função build, ou seja, constroi o projeto
+        * reconstruir_projeto() -> função rebuild, ou seja, clean e build em seguida
     logger.sh
-        * log_info() log_error() : fazem echo na info/erro q deu  
-        * mkdir -p logs : cria a pasta logs se ela nao existir
+        * log_info() e log_error() -> fazem echo na info/erro gerada pelas funções  
+        * 'mkdir -p logs' -> cria a pasta logs/ se ela não existir
     config.sh 
-        * carregar_configuracao() : carrega cbuild.conf, da erro se o arq nao foi encontrado ou se nn tem permissao de leitura
+        * carregar_configuracao() -> carrega cbuild.conf, gerando erro se o arquivo não foi encontrado ou se não tem permissão de leitura
 
 src/
     main.c  ->  printf("Arquivo main.c carregado\n")
@@ -147,7 +147,7 @@ src/
   
 cbuild  
         * verificar_gcc() -> verifica se o GCC está devidamente instalado  
-        * validar_comando() -> verifica se o comando do terminal é válido {build / run / clean / rebuild / info}  
+        * validar_comando() -> verifica se o comando do terminal é válido (build / run / clean / rebuild / info)
         * verificar_permissao() -> verifica se há permissão de leitura, escrita e execussao  
         * roda:
             * verificar_permissao, carregar_configuracao, verificar_gcc, verificar_arquivos_c "$DIRETORIO_FONTE" #src
