@@ -5,11 +5,6 @@ source "./lib/logger.sh"
 carregar_configuracao() {
     local arquivo_config="${1:-cbuild.conf}"
 
-    # Valores padrão de reserva
-    NOME_EXECUTAVEL="TecProg"
-    DIRETORIO_FONTE="src"
-    NIVEL_OTIMIZACAO="-O2"
-
     if [[ ! -f "$arquivo_config" ]]; then
         log_error "O arquivo de configuracao '$arquivo_config' nao foi encontrado"
         exit 1
@@ -20,5 +15,9 @@ carregar_configuracao() {
 
     source "$arquivo_config"
     log_info "Configuracao carregada com sucesso de $arquivo_config."
+
+    NOME_EXECUTAVEL="${NOME_EXECUTAVEL:-TecProg}"
+    DIRETORIO_FONTE="${DIRETORIO_FONTE:-src}"
+    NIVEL_OTIMIZACAO="${NIVEL_OTIMIZACAO:--O2}"
 }
 
