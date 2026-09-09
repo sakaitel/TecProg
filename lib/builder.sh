@@ -54,9 +54,12 @@ construir_projeto() {
     
     mkdir -p "$diretorio_build"
     
-    gcc "$diretorio_fonte"/*.c -o "$diretorio_build/$nome_binario"
-    
-    log_info "Compilacao finalizada. Binario gerado em $diretorio_build/$nome_binario."
+    if gcc "$diretorio_fonte"/*.c -o "$diretorio_build/$nome_binario"; then
+        log_info "Compilacao finalizada. Binario gerado em $diretorio_build/$nome_binario."
+    else
+        log_error "Falha na compilacao com GCC na funcao build."
+        exit 1
+    fi
 }
 
 reconstruir_projeto() {
