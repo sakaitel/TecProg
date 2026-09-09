@@ -1,56 +1,60 @@
-# TecProg
-
 ## Registro do Sistema
 
-### Outras pastas
-documentacao   
-| registro.md -> explicacao de pastas/arquivos/funcoes (copia disso)  
-| checklist.md -> controle de quem fez oq quando  
-  
-lib  
-| builder.sh  
------> verificar_arquivos_c() : ve na pasta /src se tem qqr arquivo .c  
------> limpar_projeto() : exclui tudo na pasta build/ 
------> mapear_executaveis() : verifica se o binário gerado (${NOME_EXECUTAVEL:-TecProg}) existe em build/  
-| logger.sh 
------> log_info() log_error() : fazem echo na info/erro q deu  
------> mkdir -p logs : cria a pasta logs se ela nao existir
-| config.sh -> carregar_configuracao() : carrega cbuild.conf, da erro se o arq nao foi encontrado ou se nn tem permissao de leitura
-  
-src  
-| main.c  ->  printf("Arquivo main.c carregado\n")  
-  
-### Arquivos principais  
-.gitignore  -> ignora build/, logs/, relatorios/  
+### Pastas e documentos   
+```text
+docs/   
+    registro.md -> explicacao de pastas/arquivos/funcoes (copia disso)  
+    checklist.md -> controle de quem fez oq quando  
+
+lib/
+    builder.sh  
+        * verificar_arquivos_c() : ve na pasta /src se tem qqr arquivo .c  
+        * limpar_projeto() : exclui tudo na pasta build/ 
+        * mapear_executaveis() : verifica se o binário gerado existe em build/  
+        * construir_projeto() : funcao build
+        * reconstruir_projeto() : rebuild, ou seja, clean e build em seguida
+    logger.sh
+        * log_info() log_error() : fazem echo na info/erro q deu  
+        * mkdir -p logs : cria a pasta logs se ela nao existir
+    config.sh 
+        * carregar_configuracao() : carrega cbuild.conf, da erro se o arq nao foi encontrado ou se nn tem permissao de leitura
+
+src/
+    main.c  ->  printf("Arquivo main.c carregado\n")
+
+.gitignore  
+        * ignora build/, logs/, relatorios/  
   
 cbuild  
-| verificar_gcc() -> autoexplicativo  
-| validar_comando() -> comando do terminal é válido {build / run / clean / rebuild / info}  
-| verificar_permissao() -> perm leitura escrita e execussao  
-  
-cbuild.conf  
-| NOME_EXECUTAVEL=TecProg, DIRETORIO_FONTE=src
-  
+        * verificar_gcc() -> autoexplicativo  
+        * validar_comando() -> comando do terminal é válido {build / run / clean / rebuild / info}  
+        * verificar_permissao() -> perm leitura escrita e execussao  
+        * roda:
+            * verificar_permissao, carregar_configuracao, verificar_gcc, verificar_arquivos_c "$DIRETORIO_FONTE" #src
+            * lê comando do terminal, validar_comando
 
+cbuild.conf  
+        * NOME_EXECUTAVEL=TecProg, DIRETORIO_FONTE=src
+```
   
 ## Checklists
 
 ### Gabi
 
 * [X] **07/09: Logs e comando clean ->** add a criacao automatica da pasta `logs/` com `mkdir -p logs` no arquivo `lib/logger.sh` e criar a função `limpar_projeto()` no `lib/builder.sh` com `rm -rf build/` para apagar os arquivos binarios antigos (pasta `build/`)
-* [ ] **11/09: Comandos build e rebuild ->** add funcao que varre a pasta `src/` em busca de arquivos `.c` (lembrando q ja existe a funcao `verificar_arquivos_c` em `lib/builder.sh`) e roda o `gcc src/*.c -o "build/$NOME_EXECUTAVEL"`. o rebuild é só chamar a limpeza e a compilacao (`clean` e `build`) um atras do outro
+* [ ] **11/09: Comandos build e rebuild ->** add funcao que varre a pasta `src/` em busca de arquivos `.c` (lembrando q ja existe a funcao `verificar_arquivos_c` em `lib/builder.sh`) e roda o `gcc src/*.c -o "build/$NOME_EXECUTAVEL"`. o rebuild é só chamar a limpeza e a compilacao (`clean` e `build`) um atras do outro.    ! ! ! LEMBRAR que tem que implementar que fazer ./cbuild build CHAMAR a funcao construir_projeto(). msm coisa com run, clean, rebuild e info, q devem chamar suas respectivas funcoes.
 * [ ] **14/09: Margem de erro ->** testar essa parte, principalmente a compilacao com varios arquivos `.c` e `.h` na pasta `src/` e verificar se o binario ta sendo gerado na pasta `build/` sem dar erro
 
 ### Duda
 
 * [X] **07/09: Estrutura basica ->** mapeia o caminho onde o executavel gerado pela Gabi ta (`build/$NOME_EXECUTAVEL`)
-* [ ] **11/09: Comando run pronto ->** cria a função do comando `run` no `lib/builder.sh` para executar `"./build/$NOME_EXECUTAVEL"`
+* [ ] **11/09: Comando run pronto ->** cria a função do comando `run` no `lib/builder.sh` para executar `"./build/$NOME_EXECUTAVEL"`     ! ! ! LEMBRAR que tem que implementar que fazer ./cbuild build CHAMAR a funcao construir_projeto(). msm coisa com run, clean, rebuild e info, q devem chamar suas respectivas funcoes.
 * [ ] **14/09: Ajustes de mensagens e avisos do run ->** TESTAR se a execução do binario registre o inicio e final do programa no arquivo de log dentro da pasta `logs/` (e tratar se a aplicacao acaba c erro)
 
 ### Andre
 
 * [ ] **07/09: Ver fallback/valores padrao + estatisticas ->** TESTAR q se alguma variavel do arquivo `cbuild.conf` for apagada sem querer, o script continue funcionando com valor padrao (`${VAR:-padrao}`) sem travar. adicionar a contagem de linhas de codigo em C (`wc -l src/*.c`)
-* [ ] **11/09: Comando info + debug/verboso ->** criar o painel do comando `info` (exibir no terminal os dados do `cbuild.conf` com `echo`) e qdo a gabi acabar a parte dela, add modo debug (`-g`) e verboso no build
+* [ ] **11/09: Comando info + debug/verboso ->** criar o painel do comando `info` (exibir no terminal os dados do `cbuild.conf` com `echo`) e qdo a gabi acabar a parte dela, add modo debug (`-g`) e verboso no build ! ! ! LEMBRAR que tem que implementar que fazer ./cbuild build CHAMAR a funcao construir_projeto(). msm coisa com run, clean, rebuild e info, q devem chamar suas respectivas funcoes.
 * [ ] **14/09: Margem de erro ->** ajustar o visual e a formatacao do terminal pra nao quebrar se nao tiver `.h` no projeto.
 
 ### Eu: Documentação, Erros e Git
