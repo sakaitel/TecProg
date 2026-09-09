@@ -1,43 +1,4 @@
-## Registro do Sistema
-
-### Pastas e documentos   
-```text
-docs/   
-    registro.md -> explicacao de pastas/arquivos/funcoes (copia disso)  
-    checklist.md -> controle de quem fez oq quando  
-
-lib/
-    builder.sh  
-        * verificar_arquivos_c() : ve na pasta /src se tem qqr arquivo .c  
-        * limpar_projeto() : exclui tudo na pasta build/ 
-        * mapear_executaveis() : verifica se o binário gerado existe em build/  
-        * construir_projeto() : funcao build
-        * reconstruir_projeto() : rebuild, ou seja, clean e build em seguida
-    logger.sh
-        * log_info() log_error() : fazem echo na info/erro q deu  
-        * mkdir -p logs : cria a pasta logs se ela nao existir
-    config.sh 
-        * carregar_configuracao() : carrega cbuild.conf, da erro se o arq nao foi encontrado ou se nn tem permissao de leitura
-
-src/
-    main.c  ->  printf("Arquivo main.c carregado\n")
-
-.gitignore  
-        * ignora build/, logs/, relatorios/  
-  
-cbuild  
-        * verificar_gcc() -> autoexplicativo  
-        * validar_comando() -> comando do terminal é válido {build / run / clean / rebuild / info}  
-        * verificar_permissao() -> perm leitura escrita e execussao  
-        * roda:
-            * verificar_permissao, carregar_configuracao, verificar_gcc, verificar_arquivos_c "$DIRETORIO_FONTE" #src
-            * lê comando do terminal, validar_comando
-
-cbuild.conf  
-        * NOME_EXECUTAVEL=TecProg, DIRETORIO_FONTE=src
-```
-  
-## Checklists
+## Checklists - APAGAR DEPOIS!!!!!!!!
 
 ### Gabi
 
@@ -66,3 +27,132 @@ cbuild.conf
   * [ ] escrever o `README.md` q nem o prof pediu :P com tabela de comandos, guia de instalacao e exemplos de uso
 * [ ] **14/09: Fechar Relatório PDF + integração ->** juntar todas as branches, resolver conflitos no git, tirar os prints das telas de erro/sucesso e fechar o PDF do relatori
 * [ ] **17/09: Entrega Final ->** gravar e editar o vídeo (ate 10 min) + entregar PDF e link do github
+
+
+
+
+
+
+
+
+
+
+# cbuild
+
+O cbuild é um utilitario de automacao de compilacao e gerenciamento de projetos em linguagem C desenvolvido em Bash pelo grupo 12 da mmatéria MAC0216 do ano de 2026. Ele visa simplificar o fluxo de desenvolvimento substituindo comandos manuais do gcc por uma interface de linha de comando padronizada, segura e com suporte a arquivos de configuracao.
+
+---
+
+## Guia de Instalacao e Requisitos
+
+### Requisitos do Sistema
+
+* Sistema Operacional baseado em Unix/Linux (Ubuntu, Debian, Fedora, Arch, etc.) ou ambiente WSL no Windows.
+* Compilador GCC instalado e acessivel no PATH.
+* Interpretador GNU Bash (versao 4.0 ou superior).    
+  
+Não cumprir esses requisitos leva a um código de erro quando o usuário tentar rodar o programa.
+
+### Instalacao
+
+1. Clone o repositorio do projeto para a sua maquina local:  
+```text
+    git clone https://github.com/sakaitel/TecProg.git
+    cd TecProg
+```
+
+2. Conceda permissao de execucao ao script principal:
+```text
+    chmod +x cbuild
+```
+---
+
+## Tabela de Comandos
+
+| Comando | Descricao |
+| --- | --- |
+| ./cbuild build | Compila os arquivos .c do diretorio fonte e gera o binario na pasta build/. |
+| ./cbuild run | Executa o binario compilado localizado no diretorio build/. |
+| ./cbuild clean | Remove a pasta build/ e elimina quaisquer arquivos objeto (.o) residuais. |
+| ./cbuild rebuild | Executa o comando clean seguido de um novo build em sequencia. |
+| ./cbuild info | Exibe o painel com as configuracoes ativas e estatisticas de linhas de codigo. |
+
+---
+
+## Exemplos de Uso
+
+### 1. Compilando o Projeto
+
+Para realizar a compilacao inicial dos arquivos em C:
+```text
+    ./cbuild build
+```
+
+### 2. Executando a Aplicação
+
+Apos a compilacao, execute o binario gerado:
+```text
+    ./cbuild run
+```
+
+### 3. Visualizando Informações e Estatísticas
+
+Para inspecionar os detalhes do ambiente e a contagem de linhas:
+```text
+    ./cbuild info
+```
+
+### 4. Limpando Artefatos Antigos
+
+Para redefinir o ambiente de compilacao:
+```text
+    ./cbuild clean
+```
+
+---
+
+## Tratamento de Erros e Logs
+
+Todas as execucoes registradas pelo cbuild geram logs gravados automaticamente no diretorio logs/execucao.log.
+
+Em caso de falha (como ausencia de compilador, erros de sintaxe em C ou tentativa de executar o run sem compilar previamente), o script interrompe o fluxo imediatamente, dispara uma mensagem formatada via log_error e encerra com codigo de retorno 1 (exit 1).
+
+---
+## Explicação dos arquivos - Registro do Sistema
+
+### Pastas e documentos   
+```text
+docs/   
+    registro.md -> explicacao de pastas/arquivos/funcoes (copia disso)  
+    checklist.md -> controle de quem fez oq quando  
+
+lib/
+    builder.sh  
+        * verificar_arquivos_c() : ve na pasta /src se tem qqr arquivo .c  
+        * limpar_projeto() : exclui tudo na pasta build/ 
+        * mapear_executaveis() : verifica se o binário gerado existe em build/  
+        * construir_projeto() : funcao build
+        * reconstruir_projeto() : rebuild, ou seja, clean e build em seguida
+    logger.sh
+        * log_info() log_error() : fazem echo na info/erro q deu  
+        * mkdir -p logs : cria a pasta logs se ela nao existir
+    config.sh 
+        * carregar_configuracao() : carrega cbuild.conf, da erro se o arq nao foi encontrado ou se nn tem permissao de leitura
+
+src/
+    main.c  ->  printf("Arquivo main.c carregado\n")
+
+.gitignore  
+        * ignora build/, logs/, relatorios/  
+  
+cbuild  
+        * verificar_gcc() -> verifica se o GCC está devidamente instalado  
+        * validar_comando() -> verifica se o comando do terminal é válido {build / run / clean / rebuild / info}  
+        * verificar_permissao() -> verifica se há permissão de leitura, escrita e execussao  
+        * roda:
+            * verificar_permissao, carregar_configuracao, verificar_gcc, verificar_arquivos_c "$DIRETORIO_FONTE" #src
+            * lê comando do terminal, validar_comando
+
+cbuild.conf  
+        * NOME_EXECUTAVEL=TecProg, DIRETORIO_FONTE=src
+```
