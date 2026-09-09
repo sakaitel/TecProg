@@ -14,10 +14,10 @@ carregar_configuracao() {
     fi
 
     source "$arquivo_config"
-    log_info "Configuracao carregada com sucesso de $arquivo_config."
 
+    # fallback DEPOIS de carregar o config.
     NOME_EXECUTAVEL="${NOME_EXECUTAVEL:-TecProg}"
     DIRETORIO_FONTE="${DIRETORIO_FONTE:-src}"
-    NIVEL_OTIMIZACAO="${NIVEL_OTIMIZACAO:--O2}"
+    
+    log_info "Configuracao carregada com sucesso de $arquivo_config."
 }
-
