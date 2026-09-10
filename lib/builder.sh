@@ -44,14 +44,22 @@ rodar_executaveis() {
     
     local hora_inicio
     local hora_fim
+    local status_execucao
 
-    hora_inicio=$(date +%H:%M:%S)
-    
+    hora_inicio=$(date "+%Y-%m-%d %H:%M:%S")
+
     ./"$arquivo_executavel"
+    
+    status_execucao=$?
 
-    hora_fim=$(date +%H:%M:%S)
+    hora_fim=$(date "+%Y-%m-%d %H:%M:%S")
 
-    log_info "Execução iniciada em $hora_inicio e concluida em $hora_fim"
+    if [[ $status_execucao -eq 0 ]]; then
+        log_info "Execução iniciada em $hora_inicio e concluída em $hora_fim com sucesso."
+    else
+        log_erro "O programa encerrou com erro (código: $status_execucao). Execução iniciada em $hora_inicio e concluída em $hora_fim."
+        exit 1
+    fi
 }
 
 construir_projeto() {
