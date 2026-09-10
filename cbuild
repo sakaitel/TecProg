@@ -6,7 +6,7 @@ source "./lib/config.sh"
 
 verificar_gcc() {
     if ! command -v gcc &> /dev/null; then
-        log_error "O GCC nao foi encontrado."
+        log_erro "O GCC nao foi encontrado."
         exit 1
     fi
 }
@@ -15,7 +15,7 @@ validar_comando() {
     local comando="$1"
 
     if [[ -z "$comando" ]]; then
-        log_error "Nenhum comando digitado { build / run / clean / rebuild / info}"
+        log_erro "Nenhum comando digitado { build / run / clean / rebuild / info}"
         exit 1
     fi
 
@@ -24,7 +24,7 @@ validar_comando() {
             # comando valido, nao faz nada
             ;;
         *)
-            log_error "Invalido: '$comando'. Opcoes: { build / run / clean / rebuild / info}"
+            log_erro "Invalido: '$comando'. Opcoes: { build / run / clean / rebuild / info}"
             exit 1
             ;;
     esac
@@ -32,7 +32,7 @@ validar_comando() {
 
 verificar_permissao() {
     if [[ ! -r "." || ! -w "." || ! -x "." ]]; then
-        log_error "Permissoes insuficientes no diretorio do projeto."
+        log_erro "Permissoes insuficientes no diretorio do projeto."
         exit 1
     fi
 }
