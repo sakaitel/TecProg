@@ -47,22 +47,22 @@ carregar_configuracao
 
 case "$COMANDO" in
     build)
-        verificar_gcc
-        verificar_arquivos_c "$DIRETORIO_FONTE"
-        construir_projeto
+        verificar_gcc #cbuild (aqui)
+        verificar_arquivos_c "$DIRETORIO_FONTE" # lib/builder.sh
+        construir_projeto # lib/builder.sh
         ;;
     run)
-        rodar_executaveis
+        rodar_executaveis # lib/builder.sh
         ;;
     clean)
-        limpar_projeto
+        limpar_projeto # lib/builder.sh
         ;;
     rebuild)
-        verificar_gcc
-        verificar_arquivos_c "$DIRETORIO_FONTE"
-        reconstruir_projeto
+        verificar_gcc #cbuild (aqui)
+        verificar_arquivos_c "$DIRETORIO_FONTE" # lib/builder.sh
+        reconstruir_projeto # lib/builder.sh
         ;;
     info)
-        exibir_info
+        exibir_info # lib/config.sh?
         ;;
 esac
