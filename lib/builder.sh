@@ -32,7 +32,7 @@ limpar_projeto() {
     find . -type f -name "*.o" -delete
 }
 
-mapear_executaveis() {
+rodar_executaveis() {
     local diretorio_build="${1:-build}"
     local nome_binario="${NOME_EXECUTAVEL:-TecProg}"
     local arquivo_executavel="$diretorio_build/$nome_binario"

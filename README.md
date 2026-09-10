@@ -130,7 +130,7 @@ lib/
     builder.sh  
         * verificar_arquivos_c() -> verifica na pasta /src se existem arquivos .c  
         * limpar_projeto() -> exclui todos os arquivos da pasta build/ 
-        * mapear_executaveis() -> verifica se o arquivo binário existe em build/  
+        * rodar_executaveis() -> verifica se o arquivo binário existe em build/  
         * construir_projeto() -> função build, ou seja, constroi o projeto
         * reconstruir_projeto() -> função rebuild, ou seja, clean e build em seguida
     logger.sh

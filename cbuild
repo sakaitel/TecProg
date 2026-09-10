@@ -11,11 +11,18 @@ verificar_gcc() {
     fi
 }
 
+verificar_permissao() {
+    if [[ ! -r "." || ! -w "." || ! -x "." ]]; then
+        log_erro "Permissoes insuficientes no diretorio do projeto."
+        exit 1
+    fi
+}
+
 validar_comando() {
     local comando="$1"
 
     if [[ -z "$comando" ]]; then
-        log_erro "Nenhum comando digitado { build / run / clean / rebuild / info}"
+        log_erro "Nenhum comando digitado { build / run / clean / rebuild / info }"
         exit 1
     fi
 
@@ -24,32 +31,38 @@ validar_comando() {
             # comando valido, nao faz nada
             ;;
         *)
-            log_erro "Invalido: '$comando'. Opcoes: { build / run / clean / rebuild / info}"
+            log_erro "Invalido: '$comando'. Opcoes: { build / run / clean / rebuild / info }"
             exit 1
             ;;
     esac
 }
 
-verificar_permissao() {
-    if [[ ! -r "." || ! -w "." || ! -x "." ]]; then
-        log_erro "Permissoes insuficientes no diretorio do projeto."
-        exit 1
-    fi
-}
-
 verificar_permissao
-log_info "Estrutura inicial rodando (cbuild)"
-
-carregar_configuracao
-verificar_gcc
-verificar_arquivos_c "$DIRETORIO_FONTE" #src
-
-log_info "Configuracao valida. Nome executavel: $NOME_EXECUTAVEL"
 
 COMANDO="$1"
 validar_comando "$COMANDO"
-log_info "Comando '$COMANDO' existe"
 
-if [[ "$COMANDO" == "info" ]]; then
-    wc -l "$DIRETORIO_FONTE"/*.c
-fi
+log_info "Estrutura inicial rodando (arquivo cbuild)"
+carregar_configuracao
+
+case "$COMANDO" in
+    build)
+        verificar_gcc
+        verificar_arquivos_c "$DIRETORIO_FONTE"
+        construir_projeto
+        ;;
+    run)
+        rodar_executaveis
+        ;;
+    clean)
+        limpar_projeto
+        ;;
+    rebuild)
+        verificar_gcc
+        verificar_arquivos_c "$DIRETORIO_FONTE"
+        reconstruir_projeto
+        ;;
+    info)
+        exibir_info
+        ;;
+esac
