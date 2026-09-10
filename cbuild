@@ -3,6 +3,7 @@
 source "./lib/logger.sh"
 source "./lib/builder.sh"
 source "./lib/config.sh"
+source "./lib/info.sh"
 
 verificar_gcc() {
     if ! command -v gcc &> /dev/null; then
