@@ -42,8 +42,16 @@ rodar_executaveis() {
         exit 1
     fi
     
-    # arquivo existe
-    # executa o binário se ele existir
+    local hora_inicio
+    local hora_fim
+
+    hora_inicio=$(date +%H:%M:%S)
+    
+    ./"$arquivo_executavel"
+
+    hora_fim=$(date +%H:%M:%S)
+
+    log_info "Execução iniciada em $hora_inicio e concluida em $hora_fim"
 }
 
 construir_projeto() {
