@@ -8,11 +8,11 @@ lib/
     builder.sh  
         * verificar_arquivos_c() : ve na pasta /src se tem qqr arquivo .c  
         * limpar_projeto() : exclui tudo na pasta build/ 
-        * mapear_executaveis() : verifica se o binário gerado existe em build/  
+        * rodar_executaveis() : verifica se o binário gerado existe em build/  
         * construir_projeto() : funcao build
         * reconstruir_projeto() : rebuild, ou seja, clean e build em seguida
     logger.sh
-        * log_info() log_error() : fazem echo na info/erro q deu  
+        * log_info() log_erro() : fazem echo na info/erro q deu : AAAA-MM-DD HH:MM:SS [comando] [INFO] - [explicacao]
         * mkdir -p logs : cria a pasta logs se ela nao existir
     config.sh 
         * carregar_configuracao() : carrega cbuild.conf, da erro se o arq nao foi encontrado ou se nn tem permissao de leitura
