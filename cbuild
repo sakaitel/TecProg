@@ -63,6 +63,6 @@ case "$COMANDO" in
         reconstruir_projeto # lib/builder.sh
         ;;
     info)
-        exibir_info # lib/config.sh?
+        exibir_info # lib/config.sh
         ;;
 esac
