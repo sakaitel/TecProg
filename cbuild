@@ -6,7 +6,14 @@ source "./lib/config.sh"
 
 verificar_gcc() {
     if ! command -v gcc &> /dev/null; then
-        log_error "O GCC nao foi encontrado."
+        log_erro "O GCC nao foi encontrado."
+        exit 1
+    fi
+}
+
+verificar_permissao() {
+    if [[ ! -r "." || ! -w "." || ! -x "." ]]; then
+        log_erro "Permissoes insuficientes no diretorio do projeto."
         exit 1
     fi
 }
@@ -15,7 +22,7 @@ validar_comando() {
     local comando="$1"
 
     if [[ -z "$comando" ]]; then
-        log_error "Nenhum comando digitado { build / run / clean / rebuild / info}"
+        log_erro "Nenhum comando digitado { build / run / clean / rebuild / info }"
         exit 1
     fi
 
@@ -24,32 +31,38 @@ validar_comando() {
             # comando valido, nao faz nada
             ;;
         *)
-            log_error "Invalido: '$comando'. Opcoes: { build / run / clean / rebuild / info}"
+            log_erro "Invalido: '$comando'. Opcoes: { build / run / clean / rebuild / info }"
             exit 1
             ;;
     esac
 }
 
-verificar_permissao() {
-    if [[ ! -r "." || ! -w "." || ! -x "." ]]; then
-        log_error "Permissoes insuficientes no diretorio do projeto."
-        exit 1
-    fi
-}
-
 verificar_permissao
-log_info "Estrutura inicial rodando (cbuild)"
-
-carregar_configuracao
-verificar_gcc
-verificar_arquivos_c "$DIRETORIO_FONTE" #src
-
-log_info "Configuracao valida. Nome executavel: $NOME_EXECUTAVEL"
 
 COMANDO="$1"
 validar_comando "$COMANDO"
-log_info "Comando '$COMANDO' existe"
 
-if [[ "$COMANDO" == "info" ]]; then
-    wc -l "$DIRETORIO_FONTE"/*.c
-fi
+log_info "Estrutura inicial rodando (arquivo cbuild)"
+carregar_configuracao
+
+case "$COMANDO" in
+    build)
+        verificar_gcc #cbuild (aqui)
+        verificar_arquivos_c "$DIRETORIO_FONTE" # lib/builder.sh
+        construir_projeto # lib/builder.sh
+        ;;
+    run)
+        rodar_executaveis # lib/builder.sh
+        ;;
+    clean)
+        limpar_projeto # lib/builder.sh
+        ;;
+    rebuild)
+        verificar_gcc #cbuild (aqui)
+        verificar_arquivos_c "$DIRETORIO_FONTE" # lib/builder.sh
+        reconstruir_projeto # lib/builder.sh
+        ;;
+    info)
+        exibir_info # lib/config.sh?
+        ;;
+esac
