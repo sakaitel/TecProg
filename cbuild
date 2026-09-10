@@ -49,3 +49,7 @@ log_info "Configuracao valida. Nome executavel: $NOME_EXECUTAVEL"
 COMANDO="$1"
 validar_comando "$COMANDO"
 log_info "Comando '$COMANDO' existe"
+
+if [[ "$COMANDO" == "info" ]]; then
+    wc -l "$DIRETORIO_FONTE"/*.c
+fi
