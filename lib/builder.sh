@@ -27,7 +27,7 @@ limpar_projeto() {
         log_info "Diretorio '$diretorio_build' removido com sucesso."
     else
         log_erro "Diretorio '$diretorio_build' nao existe. Nada a limpar."
-        exit 1
+        
     fi
     find . -type f -name "*.o" -delete
 }
