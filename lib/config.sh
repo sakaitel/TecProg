@@ -6,10 +6,10 @@ carregar_configuracao() {
     local arquivo_config="${1:-cbuild.conf}"
 
     if [[ ! -f "$arquivo_config" ]]; then
-        log_error "O arquivo de configuracao '$arquivo_config' nao foi encontrado"
+        log_erro "O arquivo de configuracao '$arquivo_config' nao foi encontrado"
         exit 1
     elif [[ ! -r "$arquivo_config" ]]; then
-        log_error "O arquivo de configuracao '$arquivo_config' nao tem permissao de leitura"
+        log_erro "O arquivo de configuracao '$arquivo_config' nao tem permissao de leitura"
         exit 1
     fi
 
