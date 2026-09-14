@@ -27,7 +27,7 @@ limpar_projeto() {
         log_info "Diretorio '$diretorio_build' removido com sucesso."
     else
         log_erro "Diretorio '$diretorio_build' nao existe. Nada a limpar."
-        exit 1
+        
     fi
     find . -type f -name "*.o" -delete
 }
@@ -70,7 +70,7 @@ construir_projeto() {
     
     mkdir -p "$diretorio_build"
     
-    if gcc "$diretorio_fonte"/*.c -o "$diretorio_build/$nome_binario"; then
+   if gcc $FLAGS_COMPILACAO "$diretorio_fonte"/*.c -o "$diretorio_build/$nome_binario"; then
         log_info "Compilacao finalizada. Binario gerado em $diretorio_build/$nome_binario."
     else
         log_erro "Falha na compilacao com GCC na funcao build."
