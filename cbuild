@@ -46,6 +46,20 @@ validar_comando "$COMANDO"
 log_info "Estrutura inicial rodando (arquivo cbuild)"
 carregar_configuracao
 
+
+FLAGS_COMPILACAO=""
+
+for arg in "${@:2}"; do
+    if [[ $arg == "--verbose"  ]]; then
+        FLAGS_COMPILACAO+=" -Wall"
+    fi
+    if [[ $arg == "--debug" ]]; then
+        FLAGS_COMPILACAO+=" -g"
+    fi
+done
+
+
+
 case "$COMANDO" in
     build)
         verificar_gcc #cbuild (aqui)
