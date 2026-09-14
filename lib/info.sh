@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
 exibir_info() {
-
+    local diretorio_include="${DIRETORIO_INCLUDE:-include}"
     local qtde_arquivos_c
 
 #CONFIGURACOES ATIVAS CBUILD.CONF
     echo "Nome do executavel: $NOME_EXECUTAVEL"
     echo "Diretorio Fonte: $DIRETORIO_FONTE"
+    echo "Diretorio Include: $DIRETORIO_INCLUDE"
 
     qtde_arquivos_c=$(find "$DIRETORIO_FONTE" -type f -name "*.c" 2>/dev/null | wc -l)
-    qtde_arquivos_h=$(find "$DIRETORIO_FONTE" -type f -name "*.h" 2>/dev/null | wc -l)
+    qtde_arquivos_h=$(find "$diretorio_include" -type f -name "*.h" 2>/dev/null | wc -l)
     qtde_arquivos_total=$(($qtde_arquivos_c + $qtde_arquivos_h))
 
 #QUANTIDADE DE ARQUIVOS
@@ -23,9 +24,9 @@ exibir_info() {
         fi
 
 #LINHAS DE CODIGO .h
-        if [[ $qtde_arquivos_h -gt 0 ]]; then
-            echo "Quantidade de linhas em arquivos .h e os arquivos: $(wc -l "$DIRETORIO_FONTE"/*.h)"
-        fi
+    if [[ $qtde_arquivos_h -gt 0 ]]; then
+        echo "Quantidade de linhas em arquivos .h e os arquivos: $(wc -l "$diretorio_include"/*.h)"
+    fi
 
     else
         log_erro "Diretorio fonte nao encontrado/vazio"

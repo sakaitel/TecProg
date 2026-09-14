@@ -18,6 +18,7 @@ carregar_configuracao() {
     # fallback DEPOIS de carregar o config.
     NOME_EXECUTAVEL="${NOME_EXECUTAVEL:-TecProg}"
     DIRETORIO_FONTE="${DIRETORIO_FONTE:-src}"
+    DIRETORIO_INCLUDE="${DIRETORIO_INCLUDE:-include}"
     
     log_info "Configuracao carregada com sucesso de $arquivo_config."
 }

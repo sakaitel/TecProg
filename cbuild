@@ -40,7 +40,7 @@ validar_comando() {
 
 verificar_permissao
 
-COMANDO="$1"
+COMANDO="${1,,}"
 validar_comando "$COMANDO"
 
 log_info "Estrutura inicial rodando (arquivo cbuild)"
@@ -78,6 +78,6 @@ case "$COMANDO" in
         reconstruir_projeto # lib/builder.sh
         ;;
     info)
-        exibir_info # lib/config.sh
+        exibir_info # lib/info.sh
         ;;
 esac
